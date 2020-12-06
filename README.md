@@ -1,0 +1,2 @@
+# favlyrics_laravel
+favlyricsのLaravelを使用したバージョンです。
