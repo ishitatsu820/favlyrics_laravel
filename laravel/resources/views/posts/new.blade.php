@@ -14,19 +14,19 @@
             <div class="form-group row">
               <label for="posts_title" class="col-md-4 col-form-label text-md-right">{{ __('Post Title') }}</label>
                 <div class="col-md-6">
-                  <input id="posts_title" type="text" class="form-control" name="title" value="あああ" autocomplete="" autofocus>
+                  <input id="posts_title" type="text" class="form-control" name="posts_title" value="" autocomplete="" autofocus>
                 </div>
               <label for="fav_lyrics" class="col-md-4 col-form-label text-md-right">{{ __('Fav Lyrics') }}</label>
                 <div class="col-md-6">
-                  <textarea id="fav_lyrics" cols="" rows="15" type="text" class="form-control" name="title" value="あああ" autocomplete="" placeholder="{{__('What is your favorite lyrics?')}}" autofocus></textarea>
+                  <textarea id="fav_lyrics" cols="" rows="15" type="text" class="form-control" name="fav_lyrics" value="" autocomplete="" placeholder="{{__('What is your favorite lyrics?')}}" autofocus></textarea>
                 </div>
-              <label for="posts" class="col-md-4 col-form-label text-md-right">{{ __('Music Title') }}</label>
+              <label for="music_title" class="col-md-4 col-form-label text-md-right">{{ __('Music Title') }}</label>
                 <div class="col-md-6">
-                  <input id="problem" type="text" class="form-control" name="title" value="あああ" autocomplete="" autofocus>
+                  <input id="music_title" type="text" class="form-control" name="music_title" value="" autocomplete="" autofocus>
                 </div>
-              <label for="posts" class="col-md-4 col-form-label text-md-right">{{ __('Artist') }}</label>
+              <label for="artist" class="col-md-4 col-form-label text-md-right">{{ __('Artist') }}</label>
                 <div class="col-md-6">
-                  <input id="problem" type="text" class="form-control" name="title" value="あああ" autocomplete="" autofocus>
+                  <input id="artist" type="text" class="form-control" name="artist" value="" autocomplete="" autofocus>
                 </div>
               
             </div>
