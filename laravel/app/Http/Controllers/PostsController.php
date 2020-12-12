@@ -9,4 +9,8 @@ class PostsController extends Controller
     public function index() {
         return view('posts.index');
     }
+
+    public function new() {
+        return view('posts.new');
+    }
 }
