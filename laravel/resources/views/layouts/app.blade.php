@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'FavLyrics v2.0') }}</title>
+    <title>{{ config('app.name', 'FavLyrics') }}</title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -72,6 +72,12 @@
             </div>
         </nav>
 
+        <!-- フラッシュメッセージ -->
+        @if (session('flash_message'))
+            <div class="alert alert-primary text-center" role="alert">
+                {{ session('flash_message') }}
+            </div>
+        @endif
         <main class="py-4">
             @yield('content')
         </main>

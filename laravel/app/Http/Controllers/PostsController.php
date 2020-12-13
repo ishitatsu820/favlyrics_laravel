@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Post;
 
 class PostsController extends Controller
 {
@@ -14,12 +15,18 @@ class PostsController extends Controller
         return view('posts.new');
     }
 
-    public function create() {
+    public function create(Request $request) {
         $request->validate([
-            'post_title' => 'required|string|max:255',
-            'fav_lyrics' => 'required|string|max:255',
+            'title' => 'required|string|max:255',
+            'lyrics' => 'required|string|max:255',
             'music_title' => 'required|string|max:255',
-            'artist' => 'required|string|max:255'
+            'artist' => 'required|string|max:255',
         ]);
+        
+        
+        $post = new Post;
+        $post->fill($request->all())->save();
+        return redirect('/posts/new')->with('flash_message', __('Registered.'));
+
     }
 }

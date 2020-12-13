@@ -22,4 +22,4 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/top', 'PostsController@index')->name('posts.index');
 Route::get('/posts/new', 'PostsController@new')->name('posts.new');
 
-Route::post('/posts/new', 'PostsController@create');
+Route::post('/posts', 'PostsController@create')->name('posts.create');
