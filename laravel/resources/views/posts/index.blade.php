@@ -23,23 +23,24 @@
 </section>
 
 <!-- 投稿一覧 -->
-<section id="posts" class="container">
-  <div class="section-title">
-      <h2>投稿一覧</h2>
-  </div>
+<div class="container">
+        <h2>{{ __('Post List') }}</h2>
+        <div class="row">
 
-  <div class="section-contents">
-    <div class="card" style="width: 18rem;">
-    <div class="card-body">
-      <h5 class="card-title">Card title</h5>
-     <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-      <a href="#" class="card-link">Card link</a>
-      <a href="#" class="card-link">Another link</a>
-    </div>
-    </div>
-  </div>
+            @foreach ($posts as $post)
 
-</section>
+            <div class="col-sm-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h3 class="card-title">{{ $post->title }}</h3>
+                        <a href="#" class="btn btn-primary">{{ __('Post Detail')  }}</a>
+                    </div>
+                </div>
+            </div>
+
+            @endforeach
+
+        </div>
+    </div>
 @endsection
 

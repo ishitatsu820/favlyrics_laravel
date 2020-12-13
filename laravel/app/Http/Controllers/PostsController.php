@@ -8,7 +8,8 @@ use App\Post;
 class PostsController extends Controller
 {
     public function index() {
-        return view('posts.index');
+        $posts = Post::all();
+        return view('posts.index', compact('posts'));
     }
 
     public function new() {
@@ -23,7 +24,7 @@ class PostsController extends Controller
             'artist' => 'required|string|max:255',
         ]);
         
-        
+
         $post = new Post;
         $post->fill($request->all())->save();
         return redirect('/posts/new')->with('flash_message', __('Registered.'));
