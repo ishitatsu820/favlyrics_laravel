@@ -30,4 +30,24 @@ class PostsController extends Controller
         return redirect('/posts/new')->with('flash_message', __('Registered.'));
 
     }
+
+    public function edit($id) {
+        if(!ctype_digit($id)){
+            return redirect('/posts/new')->with('flash_message', __('Invalid operation was performed.'));
+        }
+        $post = Post::find($id);
+        return view('posts.edit', compact('post'));
+    }
+    public function update(Request $request, $id)
+{
+        // GETパラメータが数字かどうかをチェックする
+        if(!ctype_digit($id)){
+            return redirect('/posts/new')->with('flash_message', __('Invalid operation was performed.'));
+        }
+
+        $post = Post::find($id);
+        $post->fill($request->all())->save();
+
+        return redirect('/top')->with('flash_message', __('Registered.'));
+}
 }
