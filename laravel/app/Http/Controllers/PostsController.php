@@ -39,7 +39,7 @@ class PostsController extends Controller
         return view('posts.edit', compact('post'));
     }
     public function update(Request $request, $id)
-{
+    {
         // GETパラメータが数字かどうかをチェックする
         if(!ctype_digit($id)){
             return redirect('/posts/new')->with('flash_message', __('Invalid operation was performed.'));
@@ -49,5 +49,14 @@ class PostsController extends Controller
         $post->fill($request->all())->save();
 
         return redirect('/top')->with('flash_message', __('Registered.'));
-}
+    }
+    public function delete(Request $request, $id)
+    {
+        if(!ctype_digit($id)){
+            return redirect('posts/new')->with('flash_message', __('Invalid operation was performed.'));
+        }
+        Post::find($id)->delete();
+
+        return redirect('/top')->with('flash_message', __('Complete.'));
+    }
 }

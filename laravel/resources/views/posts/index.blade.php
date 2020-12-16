@@ -34,6 +34,11 @@
                     <div class="card-body">
                         <h3 class="card-title">{{ $post->title }}</h3>
                         <a href="#" class="btn btn-primary">{{ __('Post Detail')  }}</a>
+                        <a href="{{ route('posts.edit', $post->id) }}" class="btn btn-secondary">{{ __('Post Edit')  }}</a>
+                        <form action="{{ route('posts.delete', $post->id) }}" method="post" class="d-inline">
+                        @csrf
+                        <button class="btn btn-danger" onclick='return confirm("削除しますか？");'>{{__('Post Delete') }}</button>
+                        </form>
                     </div>
                 </div>
             </div>
