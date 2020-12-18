@@ -59,4 +59,12 @@ class PostsController extends Controller
 
         return redirect('/top')->with('flash_message', __('Complete.'));
     }
+    public function show($id)
+    {
+        if(!ctype_digit($id)){
+            return derirect('top')->with('flash_message', __('Invaild operation was performd.'));
+        }
+        $post = Post::find($id);
+        return view('posts.show', compact('post'));
+    }
 }
