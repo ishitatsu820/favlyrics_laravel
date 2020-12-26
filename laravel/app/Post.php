@@ -11,5 +11,9 @@ class Post extends Model
     protected $fillable = ['title', 'lyrics', 'artist', 'music_title','delete_flg'];
     //変更してはいけないのならば
     //protected $guarded = ['id'];
+    public function user()
+    {
+        return $this->belongsTo('App\User'); 
+    }
 
 }
