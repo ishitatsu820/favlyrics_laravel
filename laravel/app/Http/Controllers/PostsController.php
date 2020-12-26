@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Post;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PostsController extends Controller
 {
@@ -26,7 +27,7 @@ class PostsController extends Controller
         
 
         $post = new Post;
-        $post->fill($request->all())->save();
+        Auth::user()->posts()->save($post->fill($request->all()));
         return redirect('/posts/new')->with('flash_message', __('Registered.'));
 
     }
@@ -66,5 +67,10 @@ class PostsController extends Controller
         }
         $post = Post::find($id);
         return view('posts.show', compact('post'));
+    }
+    public function mypage()
+    {
+        $posts = Auth::user()->posts()->get();
+        return view('posts.mypage',compact('posts'));
     }
 }
