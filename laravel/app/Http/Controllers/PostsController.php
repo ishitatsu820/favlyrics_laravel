@@ -36,7 +36,7 @@ class PostsController extends Controller
         if(!ctype_digit($id)){
             return redirect('/posts/new')->with('flash_message', __('Invalid operation was performed.'));
         }
-        $post = Post::find($id);
+        $post = Auth::user()->posts()->find($id);
         return view('posts.edit', compact('post'));
     }
     public function update(Request $request, $id)
@@ -56,7 +56,8 @@ class PostsController extends Controller
         if(!ctype_digit($id)){
             return redirect('posts/new')->with('flash_message', __('Invalid operation was performed.'));
         }
-        Post::find($id)->delete();
+
+        Auth::user()->posts()->find($id)->delete();
 
         return redirect('/top')->with('flash_message', __('Complete.'));
     }
