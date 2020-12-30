@@ -4,13 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
 class PostsController extends Controller
 {
     public function index() {
-        $posts = Post::all();
-        return view('posts.index', compact('posts'));
+        $posts = Post::paginate(15);
+        return view('posts.index', ['posts' => $posts]);
     }
 
     public function new() {
