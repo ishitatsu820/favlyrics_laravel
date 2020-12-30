@@ -18,8 +18,12 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-
 Route::get('/top', 'PostsController@index')->name('posts.index');
-Route::get('/posts/new', 'PostsController@new')->name('posts.new');
+Route::get('/posts/new', 'PostsController@new')->name('posts.new')->middleware('logincheck');
+Route::get('/posts/{id}/edit', 'PostsController@edit')->name('posts.edit');
+Route::get('/posts/{id}/show', 'PostsController@show')->name('posts.show');
+Route::get('/mypage', 'PostsController@mypage')->name('posts.mypage')->middleware('logincheck');
 
 Route::post('/posts', 'PostsController@create')->name('posts.create');
+Route::post('/posts/{id}', 'PostsController@update')->name('posts.update');
+Route::post('/posts/{id}/delete', 'PostsController@delete')->name('posts.delete');

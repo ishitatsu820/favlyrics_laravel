@@ -2,13 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Post;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class PostsController extends Controller
 {
     public function index() {
-        return view('posts.index');
+        $posts = Post::paginate(15);
+        return view('posts.index', ['posts' => $posts]);
     }
 
     public function new() {
@@ -23,10 +26,53 @@ class PostsController extends Controller
             'artist' => 'required|string|max:255',
         ]);
         
-        
+
         $post = new Post;
-        $post->fill($request->all())->save();
+        Auth::user()->posts()->save($post->fill($request->all()));
         return redirect('/posts/new')->with('flash_message', __('Registered.'));
 
+    }
+
+    public function edit($id) {
+        if(!ctype_digit($id)){
+            return redirect('/posts/new')->with('flash_message', __('Invalid operation was performed.'));
+        }
+        $post = Auth::user()->posts()->find($id);
+        return view('posts.edit', compact('post'));
+    }
+    public function update(Request $request, $id)
+    {
+        // GETパラメータが数字かどうかをチェックする
+        if(!ctype_digit($id)){
+            return redirect('/posts/new')->with('flash_message', __('Invalid operation was performed.'));
+        }
+
+        $post = Post::find($id);
+        $post->fill($request->all())->save();
+
+        return redirect('/top')->with('flash_message', __('Registered.'));
+    }
+    public function delete(Request $request, $id)
+    {
+        if(!ctype_digit($id)){
+            return redirect('posts/new')->with('flash_message', __('Invalid operation was performed.'));
+        }
+
+        Auth::user()->posts()->find($id)->delete();
+
+        return redirect('/top')->with('flash_message', __('Complete.'));
+    }
+    public function show($id)
+    {
+        if(!ctype_digit($id)){
+            return derirect('top')->with('flash_message', __('Invaild operation was performd.'));
+        }
+        $post = Post::find($id);
+        return view('posts.show', compact('post'));
+    }
+    public function mypage()
+    {
+        $posts = Auth::user()->posts()->get();
+        return view('posts.mypage',compact('posts'));
     }
 }
